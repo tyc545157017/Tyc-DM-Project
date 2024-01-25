@@ -1,0 +1,10 @@
+highway-v0:
+  DoubleDQN: 0
+  DuelingDQN: 1
+  PPO: 0
+  SAC: 0
+tyc-highway-v0:
+  DoubleDQN: 2
+  DuelingDQN: 1
+  PPO: 2
+  SAC: 1
