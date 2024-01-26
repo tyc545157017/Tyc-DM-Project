@@ -68,14 +68,20 @@ class ParamManager:
 			with open(self.version_path, 'r') as file:
 				self.version_config = yaml.load(file, Loader=yaml.Loader)
 			pprint(self.version_config)
-			if self.train:
-				self.train_version = self.version_config[self.env_name][self.drl_type]
-			elif self.train_version == -1:
-				self.train_version = self.version_config[self.env_name][self.drl_type] - 1
-				print(f"read last train model v{self.train_version} to test".center(100, '-'))
-			else:
-				self.train_version = train_version
-				print(f"use customized version {self.train_version} to test".center(100, '-'))
+			if self.train_version == -1:
+				if self.train:
+					self.train_version = self.version_config[self.env_name][self.drl_type]
+				else:
+					self.train_version = self.version_config[self.env_name][self.drl_type] - 1
+					print(f"read last train model v{self.train_version} to test".center(100, '-'))
+			# if self.train:
+			# 	self.train_version = self.version_config[self.env_name][self.drl_type]
+			# elif self.train_version == -1:
+			# 	self.train_version = self.version_config[self.env_name][self.drl_type] - 1
+			# 	print(f"read last train model v{self.train_version} to test".center(100, '-'))
+			# else:
+			# 	self.train_version = train_version
+			# 	print(f"use customized version {self.train_version} to test".center(100, '-'))
 
 	def update_version_files(self, **kwargs):
 		if len(kwargs) != 0:
