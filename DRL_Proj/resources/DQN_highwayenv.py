@@ -281,7 +281,7 @@ if __name__ == "__main__":
     random_seed = 0
 
     retrain = False
-    train = True
+    train = False
     train_version = -1
     # dqn_type = "DuelingDQN"
     # env_name = 'highway-v0'

@@ -147,7 +147,12 @@ class PPO:
 		state = torch.tensor(np.array([state]), dtype=torch.float).to(self.device)
 		probs = self.actor(state)
 		# print(f"probs: {probs}")
-		action_dist = torch.distributions.Categorical(probs)
+		try:
+			action_dist = torch.distributions.Categorical(probs)
+		except Exception as e:
+			print(f'probs: {probs}')
+			print(f'act_loss:{self.act_loss}')
+			raise e
 		action = action_dist.sample()
 		return action.item()
 
@@ -324,8 +329,8 @@ if __name__ == '__main__':
 	# env_name = 'highway-v0'
 	env_name = 'tyc-highway-v0'
 	lr = {
-		'actor_lr': 1e-3,
-		'critic_lr': 5e-2
+		'actor_lr': 1e-4,
+		'critic_lr': 5e-3
 	}
 	drl_param = {
 		'gamma': 0.9,
@@ -333,7 +338,7 @@ if __name__ == '__main__':
 		'epochs': 100,
 		'eps': 0.2
 	}
-	num_episodes = 3000
+	num_episodes = 6000
 	ppo_pm = ParamManager(env_name, drl_type, drl_param, lr, num_episodes, train_version=train_version, train=train)
 	model_path = os.path.join(ppo_pm.model_dir, 'model.pkl')
 	config_path = os.path.join(ppo_pm.config_dir, 'config.yaml')

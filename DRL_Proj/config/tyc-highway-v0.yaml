@@ -7,7 +7,7 @@ collision_reward: -1
 controlled_vehicles: 1
 duration: 180
 ego_spacing: 2
-high_speed_reward: 1
+high_speed_reward: 0.5
 initial_lane_id: null
 lane_change_reward: 0
 lanes_count: 4

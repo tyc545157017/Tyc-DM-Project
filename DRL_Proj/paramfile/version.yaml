@@ -4,7 +4,7 @@ highway-v0:
   PPO: 0
   SAC: 0
 tyc-highway-v0:
-  DoubleDQN: 2
+  DoubleDQN: 3
   DuelingDQN: 1
-  PPO: 2
-  SAC: 1
+  PPO: 4
+  SAC: 2

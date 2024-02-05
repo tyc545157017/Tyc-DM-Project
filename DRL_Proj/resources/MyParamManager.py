@@ -60,10 +60,10 @@ class ParamManager:
 		if not os.path.exists(self.version_path):
 			try:
 				os.mkdir(os.path.dirname(self.version_path))
+				with open(self.version_path, 'w') as file:
+					yaml.dump(self.version_config, file)
 			except FileExistsError:
 				print("floder existed")
-			with open(self.version_path, 'w') as file:
-				yaml.dump(self.version_config, file)
 		else:
 			with open(self.version_path, 'r') as file:
 				self.version_config = yaml.load(file, Loader=yaml.Loader)
@@ -88,6 +88,7 @@ class ParamManager:
 			for key, value in kwargs.items():
 				self.version_config[key].update(value)
 		self.version_config[self.env_name][self.drl_type] += 1
+		pprint(self.version_config)
 		with open(self.version_path, 'w') as file:
 			yaml.dump(self.version_config, file)
 
